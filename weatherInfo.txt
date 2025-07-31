@@ -1,0 +1,3 @@
+grib_dump -O singapore.grib2
+g++ cscript.cpp -o grib2_to_xml -leccodes -ltinyxml2
+./grib2_to_xml
