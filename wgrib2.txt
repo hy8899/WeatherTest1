@@ -1,0 +1,61 @@
+================================
+PRE-REQUISITES
+================================
+- Download project from my GitHub
+https://github.com/hy8899/WeatherTest1
+
+- "Weather Data (wgrib2)" folder contains the compiled wgrib2 with the needed INTERPOLATES package
+
+- Reference GitHub for all needed packages if need to build from scratch 
+(just use mine I took >1 day to figure this out)
+https://github.com/NOAA-EMC/wgrib2
+
+================================
+GETTING WEATHER DATA
+================================
+1) Open "wsl" in command prompt
+wsl
+
+2) Navigate to folder with built "wgrib2" exe
+cd /mnt/c/Users/<USERNAME>/<FOLDERPATH>/build/wgrib2/build/wgrib2
+(example)
+cd /mnt/c/Users/88hhy/Downloads/wgribStuff/wgribStuff/build/wgrib2/build/wgrib2
+
+3) Use "wget" to get weather data from "nomads" website
+sudo apt update
+sudo apt install wget
+
+wget https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod
+(example)
+wget https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.20250929/12/atmos/gfs.t12z.pgrb2.0p25.f000
+
+================================
+INTERPOLATING WEATHER DATA
+================================
+1) Run "wgrib2" command to interpolate weather data for Singapore lat/lon w/ 0.125 delta
+
+./wgrib2 <FILENAME> \
+  -new_grid_winds earth \
+  -new_grid_interpolation bilinear \
+  -if ":(VGTYP|SOTYP):" \
+     -new_grid_interpolation neighbor \
+  -fi \
+  -new_grid latlon 91:116:0.125 -11:13:0.125 newsingapore.grib2
+
+(example)
+./wgrib2 gfs.t12z.pgrb2.0p25.f000 \
+  -new_grid_winds earth \
+  -new_grid_interpolation bilinear \
+  -if ":(VGTYP|SOTYP):" \
+     -new_grid_interpolation neighbor \
+  -fi \
+  -new_grid latlon 91:116:0.125 -11:13:0.125 newsingapore.grib2
+
+
+***
+NOTE: If you see this error after running the wgrib command:
+./wgrib2: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory
+
+INSTALL this package:
+sudo apt install liblapack3 liblapack-dev
+**

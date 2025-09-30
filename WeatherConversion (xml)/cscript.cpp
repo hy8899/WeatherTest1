@@ -8,38 +8,45 @@
 
 using namespace tinyxml2;
 
-// Helper to convert grib time (yyyymmddhhmm) to ISO8601 string
+// Helper to convert grib time (yyyy/mm/dd/hh/mm) to ISO8601 string
 std::string timeToISO(int year, int month, int day, int hour, int minute) {
     char buf[32];
-    snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:00Z",
+    snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:00.000Z",
              year, month, day, hour, minute);
     return std::string(buf);
 }
 
 int main() {
+
+    // input & output files
     const char* input_file = "newsingapore.grib2";
     const char* output_file = "newoutput.xml";
 
+    // open input file
     FILE* f = fopen(input_file, "rb");
     if (!f) {
         std::cerr << "Failed to open input file\n";
         return 1;
     }
 
+    // declare xml & declaration
     XMLDocument doc;
-    XMLElement* root = doc.NewElement("gribObject");
-    root->SetAttribute("xmlns", "http://c4i.mlt/ICDU/schema");
-    root->SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-    root->SetAttribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
-    doc.InsertFirstChild(root);
+    XMLDeclaration* decl = doc.NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
+    doc.InsertFirstChild(decl);
+
+    // add root element
+    XMLElement* root = doc.NewElement("gribObjects");
+    doc.InsertEndChild(root);
 
     codes_handle* h = nullptr;
     int err = 0;
     int messageCount = 0;
 
     while ((h = codes_handle_new_from_file(nullptr, f, PRODUCT_GRIB, &err)) != nullptr) {
+
         messageCount++;
 
+        // get date & time variables
         long edition = 0, dataDate, dataTime;
         codes_get_long(h, "edition", &edition);
         codes_get_long(h, "dataDate", &dataDate);
@@ -73,27 +80,39 @@ int main() {
         std::vector<double> values(values_len);
         codes_get_double_array(h, "values", values.data(), &values_len);
 
-        XMLElement* msgElem = doc.NewElement("GRIB_Message");
-        msgElem->SetAttribute("ForecastTime", run_time.c_str());
-        msgElem->SetAttribute("RunTime", run_time.c_str());
-
         char parameterName[100];
         size_t nameLen = sizeof(parameterName);
         int err = codes_get_string(h, "name", parameterName, &nameLen);
-        msgElem->SetAttribute("ParameterName", parameterName);
 
+        // ==============================
+        // GRIB OBJECT Element
+        // ==============================
+        XMLElement* msgElem = doc.NewElement("gribObject");
+
+        msgElem->SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        msgElem->SetAttribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
+        msgElem->SetAttribute("xmlns", "http://c4i.mlt/ICDU/schema");
+
+        msgElem->SetAttribute("ForecastTime", run_time.c_str());
+        msgElem->SetAttribute("RunTime", run_time.c_str());
+        msgElem->SetAttribute("ParameterName", parameterName);
         msgElem->SetAttribute("FileName", filename.c_str());
 
         long section1Length = 0;
         codes_get_long(h, "section1Length", &section1Length);
+
+        // ==============================
+        // INDICATOR Element
+        // ==============================
         XMLElement* indicator = doc.NewElement("Indicator");
+        indicator->SetAttribute("xmlns", "");
         indicator->SetAttribute("GribHeader", "GRIB");
         indicator->SetAttribute("NumOfOctets", std::to_string(section1Length).c_str());
         indicator->SetAttribute("GribType", std::to_string(edition).c_str());
         msgElem->InsertEndChild(indicator);
 
         long tablesVersion, centre, genProcID, gridTypeCode;
-        long parameterNumber, typeOfLevel, level, timeRangeIndicator, localDefNumber;
+        long parameterNumber, typeOfLevel, level, timeRangeIndicator, subcenterID;
         long decimalScaleFactor;
 
         codes_get_long(h, "tablesVersion", &tablesVersion);
@@ -104,7 +123,7 @@ int main() {
         codes_get_long(h, "typeOfLevel", &typeOfLevel);
         codes_get_long(h, "level", &level);
         codes_get_long(h, "indicatorOfUnitOfTimeRange", &timeRangeIndicator);
-        codes_get_long(h, "localDefinitionNumber", &localDefNumber);
+        codes_get_long(h, "subCentre", &subcenterID);
         codes_get_long(h, "decimalScaleFactor", &decimalScaleFactor);
 
         size_t section4Length = 0;
@@ -116,14 +135,26 @@ int main() {
         codes_get_long(h, "hour", &hour);
         codes_get_long(h, "minute", &minute);
 
+        // =======================================
+        // PRODUCT DEFINITION Element
+        // =======================================
         XMLElement* prodDef = doc.NewElement("ProductDefinition");
+        prodDef->SetAttribute("xmlns", "");
         prodDef->SetAttribute("NumOfOctets", std::to_string(section4Length * 4).c_str());
         prodDef->SetAttribute("ParamTableVersion", std::to_string(tablesVersion).c_str());
         prodDef->SetAttribute("OrigCenter", std::to_string(centre).c_str());
         prodDef->SetAttribute("ProcessID", std::to_string(genProcID).c_str());
-        prodDef->SetAttribute("GridID", std::to_string(gridTypeCode).c_str());
+
+        int gridCode = static_cast<int>(gridTypeCode & 0xFF);
+        prodDef->SetAttribute("GridID", std::to_string(gridCode).c_str());
+        //prodDef->SetAttribute("GridID", std::to_string(gridTypeCode).c_str());
+
         prodDef->SetAttribute("GDS_BDS_Flag", "128");
-        prodDef->SetAttribute("ParamAndUnits", std::to_string(parameterNumber).c_str());
+
+        int paramNumber = static_cast<int>(parameterNumber & 0xFF);
+        prodDef->SetAttribute("ParamAndUnits", std::to_string(paramNumber).c_str());
+        //prodDef->SetAttribute("ParamAndUnits", std::to_string(parameterNumber).c_str());
+
         prodDef->SetAttribute("LevelType", std::to_string(typeOfLevel).c_str());
         prodDef->SetAttribute("Level", std::to_string(level).c_str());
         prodDef->SetAttribute("ReferenceTime", std::to_string(d).c_str());
@@ -139,22 +170,20 @@ int main() {
 
         double numInAvg = 0;
         codes_get_double(h, "average", &numInAvg);
-
-        std::ostringstream oss;
-        oss << std::setprecision(6) << numInAvg;
-        prodDef->SetAttribute("NumInAverage", oss.str().c_str());
+        prodDef->SetAttribute("NumInAverage", 
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(numInAvg)).str().c_str());
 
         long numMissing = 0;
         codes_get_long(h, "numberOfMissing", &numMissing);
         prodDef->SetAttribute("NumMissingAverage", std::to_string(numMissing).c_str());
 
         prodDef->SetAttribute("CenturyOfReference", "21");
-        prodDef->SetAttribute("SubcenterID", std::to_string(localDefNumber).c_str());
+        prodDef->SetAttribute("SubcenterID", std::to_string(subcenterID).c_str());
         prodDef->SetAttribute("DecimalScaleFactor", std::to_string(decimalScaleFactor).c_str());
         prodDef->SetAttribute("Reserved1", "0");
         msgElem->InsertEndChild(prodDef);
 
-        // GridDescription (stub)
+        // GridDescription (lat/lon degrees)
         long Ni, Nj;
         double lat1, lon1, lat2, lon2, di, dj;
         long scanningMode;
@@ -176,25 +205,54 @@ int main() {
         codes_get_long(h, "section3Length", &section3Length);
         codes_get_long(h, "NV", &NV);
         codes_get_long(h, "PV", &PV);
-        codes_get_long(h, "dataRepresentationType", &dataRepType);
+        codes_get_long(h, "dataRepresentationTemplateNumber", &dataRepType);
+        //codes_get_long(h, "dataRepresentationType", &dataRepType);
 
+        // =======================================
+        // GRID DESCRIPTION Element
+        // =======================================
         XMLElement* gridDesc = doc.NewElement("GridDescription");
+        gridDesc->SetAttribute("xmlns", "");
         gridDesc->SetAttribute("NumOfOctets", section3Length);
         gridDesc->SetAttribute("NV", NV);
-        gridDesc->SetAttribute("PV", PV);
+        gridDesc->SetAttribute("PV", "255");
         gridDesc->SetAttribute("DataRepresentationType", dataRepType);
 
-
+        // =======================================
+        // Lat Lon Projection Element
+        // =======================================
         XMLElement* proj = doc.NewElement("LatLonProjection");
         proj->SetAttribute("Ni", std::to_string(Ni).c_str());
         proj->SetAttribute("Nj", std::to_string(Nj).c_str());
-        proj->SetAttribute("Lat1", std::to_string(lat1 * 1000.0f).c_str());
-        proj->SetAttribute("Lon1", std::to_string(lon1 * 1000.0f).c_str());
+
+        prodDef->SetAttribute("Lat1", 
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lat1 * 1000.0)).str().c_str());
+
+        prodDef->SetAttribute("Lon1",
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lon1 * 1000.0)).str().c_str());
+
+        //proj->SetAttribute("Lat1", std::to_string(std::trunc(lat1 * 1000.0f)).c_str());
+        //proj->SetAttribute("Lon1", std::to_string(std::trunc(lon1 * 1000.0f)).c_str());
+
         proj->SetAttribute("Flags", "128");
-        proj->SetAttribute("Lat2", std::to_string(lat2 * 1000.0f).c_str());
-        proj->SetAttribute("Lon2", std::to_string(lon2 * 1000.0f).c_str());
-        proj->SetAttribute("Di", std::to_string(di).c_str());
-        proj->SetAttribute("Dj", std::to_string(dj).c_str());
+
+        prodDef->SetAttribute("Lat2",
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lat2 * 1000.0)).str().c_str());
+
+        prodDef->SetAttribute("Lon2",
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lon2 * 1000.0)).str().c_str());
+
+        prodDef->SetAttribute("Di",
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(di * 1000.0)).str().c_str());
+
+        prodDef->SetAttribute("Dj",
+            (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(dj * 1000.0)).str().c_str());
+
+        //proj->SetAttribute("Lat2", std::to_string(std::trunc(lat2 * 1000.0f)).c_str());
+        //proj->SetAttribute("Lon2", std::to_string(std::trunc(lon2 * 1000.0f)).c_str());
+        //proj->SetAttribute("Di", std::to_string(std::trunc(di * 1000.0f)).c_str());
+        //proj->SetAttribute("Dj", std::to_string(std::trunc(dj * 1000.0f)).c_str());
+
         proj->SetAttribute("ScanFlags", std::to_string(scanningMode).c_str());
         proj->SetAttribute("Reserved", "0");
 
@@ -207,7 +265,11 @@ int main() {
         codes_get_double(h, "referenceValue", &referenceValue);
         codes_get_long(h, "numberOfValues", &numberOfValues);
 
+        // =======================================
+        // BINARY DATA element
+        // =======================================
         XMLElement* binaryData = doc.NewElement("BinaryData");
+        binaryData->SetAttribute("xmlns", "");
         binaryData->SetAttribute("NumOfOctets", std::to_string(values_len * 4).c_str());
         binaryData->SetAttribute("FlagsAndUnused", "12");
         binaryData->SetAttribute("BinaryScaleFactor", std::to_string(binaryScaleFactor).c_str());
@@ -215,18 +277,25 @@ int main() {
         binaryData->SetAttribute("DatumPacked", std::to_string(numberOfValues).c_str());
         binaryData->SetAttribute("OptionalFlags", "0");
 
+        // =======================================
+        // TempDataArray Element
+        // =======================================
         XMLElement* tempArray = doc.NewElement("TempDataArray");
         std::string valStr;
         for (auto v : values) {
             char buf[32];
-            snprintf(buf, sizeof(buf), "%.8f ", v);
+            snprintf(buf, sizeof(buf), "%.2f ", v);
             valStr += buf;
         }
         tempArray->SetText(valStr.c_str());
         binaryData->InsertEndChild(tempArray);
         msgElem->InsertEndChild(binaryData);
 
+        // =======================================
+        // END Element
+        // =======================================
         XMLElement* endTag = doc.NewElement("End");
+        endTag->SetAttribute("xmlns", "");
         endTag->SetAttribute("EndString", "7777");
         msgElem->InsertEndChild(endTag);
 

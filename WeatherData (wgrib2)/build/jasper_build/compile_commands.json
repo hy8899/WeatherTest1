@@ -1,0 +1,356 @@
+[
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_cm.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_cm.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_cm.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_cm.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_debug.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_debug.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_debug.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_debug.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_getopt.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_getopt.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_getopt.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_getopt.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_icc.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_icc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_icc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_icc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_iccdata.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_iccdata.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_iccdata.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_iccdata.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_image.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_image.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_image.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_image.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_init.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_init.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_init.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_init.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_malloc.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_malloc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_malloc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_malloc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_seq.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_seq.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_seq.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_seq.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_stream.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_stream.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_stream.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_stream.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_string.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_string.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_string.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_string.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_tmr.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_tmr.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_tmr.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_tmr.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_tvp.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_tvp.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_tvp.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_tvp.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/base/jas_version.c.o -c /home/admin1/build/jasper/src/libjasper/base/jas_version.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/base/jas_version.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/base/jas_version.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/bmp/bmp_cod.c.o -c /home/admin1/build/jasper/src/libjasper/bmp/bmp_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/bmp/bmp_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/bmp/bmp_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/bmp/bmp_dec.c.o -c /home/admin1/build/jasper/src/libjasper/bmp/bmp_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/bmp/bmp_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/bmp/bmp_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/bmp/bmp_enc.c.o -c /home/admin1/build/jasper/src/libjasper/bmp/bmp_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/bmp/bmp_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/bmp/bmp_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jp2/jp2_cod.c.o -c /home/admin1/build/jasper/src/libjasper/jp2/jp2_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jp2/jp2_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jp2/jp2_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jp2/jp2_dec.c.o -c /home/admin1/build/jasper/src/libjasper/jp2/jp2_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jp2/jp2_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jp2/jp2_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jp2/jp2_enc.c.o -c /home/admin1/build/jasper/src/libjasper/jp2/jp2_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jp2/jp2_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jp2/jp2_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_bs.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_bs.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_bs.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_bs.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_cs.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_cs.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_cs.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_cs.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_cod.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_dec.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_enc.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_math.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_math.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_math.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_math.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_mct.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_mct.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_mct.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_mct.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_mqcod.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_mqcod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_mqcod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_mqcod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_mqdec.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_mqdec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_mqdec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_mqdec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_mqenc.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_mqenc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_mqenc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_mqenc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_qmfb.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_qmfb.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_qmfb.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_qmfb.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_t1cod.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_t1cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_t1cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_t1cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_t1dec.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_t1dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_t1dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_t1dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_t1enc.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_t1enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_t1enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_t1enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_t2cod.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_t2cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_t2cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_t2cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_t2dec.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_t2dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_t2dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_t2dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_t2enc.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_t2enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_t2enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_t2enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_tagtree.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_tagtree.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_tagtree.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_tagtree.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_tsfb.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_tsfb.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_tsfb.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_tsfb.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpc/jpc_util.c.o -c /home/admin1/build/jasper/src/libjasper/jpc/jpc_util.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpc/jpc_util.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpc/jpc_util.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpg/jpg_val.c.o -c /home/admin1/build/jasper/src/libjasper/jpg/jpg_val.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpg/jpg_val.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpg/jpg_val.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpg/jpg_dec.c.o -c /home/admin1/build/jasper/src/libjasper/jpg/jpg_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpg/jpg_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpg/jpg_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/jpg/jpg_enc.c.o -c /home/admin1/build/jasper/src/libjasper/jpg/jpg_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/jpg/jpg_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/jpg/jpg_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/mif/mif_cod.c.o -c /home/admin1/build/jasper/src/libjasper/mif/mif_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/mif/mif_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/mif/mif_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/pgx/pgx_cod.c.o -c /home/admin1/build/jasper/src/libjasper/pgx/pgx_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/pgx/pgx_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/pgx/pgx_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/pgx/pgx_dec.c.o -c /home/admin1/build/jasper/src/libjasper/pgx/pgx_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/pgx/pgx_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/pgx/pgx_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/pgx/pgx_enc.c.o -c /home/admin1/build/jasper/src/libjasper/pgx/pgx_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/pgx/pgx_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/pgx/pgx_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/pnm/pnm_cod.c.o -c /home/admin1/build/jasper/src/libjasper/pnm/pnm_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/pnm/pnm_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/pnm/pnm_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/pnm/pnm_dec.c.o -c /home/admin1/build/jasper/src/libjasper/pnm/pnm_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/pnm/pnm_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/pnm/pnm_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/pnm/pnm_enc.c.o -c /home/admin1/build/jasper/src/libjasper/pnm/pnm_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/pnm/pnm_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/pnm/pnm_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/ras/ras_cod.c.o -c /home/admin1/build/jasper/src/libjasper/ras/ras_cod.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/ras/ras_cod.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/ras/ras_cod.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/ras/ras_dec.c.o -c /home/admin1/build/jasper/src/libjasper/ras/ras_dec.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/ras/ras_dec.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/ras/ras_dec.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/libjasper",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -Dlibjasper_EXPORTS -I/home/admin1/build/jasper_build/src/libjasper/include -I/home/admin1/build/jasper/src/libjasper/include  -pedantic -std=gnu11 -fPIC -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/libjasper.dir/ras/ras_enc.c.o -c /home/admin1/build/jasper/src/libjasper/ras/ras_enc.c",
+  "file": "/home/admin1/build/jasper/src/libjasper/ras/ras_enc.c",
+  "output": "src/libjasper/CMakeFiles/libjasper.dir/ras/ras_enc.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/app",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -I/home/admin1/build/jasper/src/app/../libjasper/include -I/home/admin1/build/jasper_build/src/app/../libjasper/include  -pedantic -std=gnu11 -fPIE -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/jasper.dir/jasper.c.o -c /home/admin1/build/jasper/src/app/jasper.c",
+  "file": "/home/admin1/build/jasper/src/app/jasper.c",
+  "output": "src/app/CMakeFiles/jasper.dir/jasper.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/app",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -I/home/admin1/build/jasper/src/app/../libjasper/include -I/home/admin1/build/jasper_build/src/app/../libjasper/include  -pedantic -std=gnu11 -fPIE -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/imginfo.dir/imginfo.c.o -c /home/admin1/build/jasper/src/app/imginfo.c",
+  "file": "/home/admin1/build/jasper/src/app/imginfo.c",
+  "output": "src/app/CMakeFiles/imginfo.dir/imginfo.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/app",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -I/home/admin1/build/jasper/src/app/../libjasper/include -I/home/admin1/build/jasper_build/src/app/../libjasper/include  -pedantic -std=gnu11 -fPIE -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/imgcmp.dir/imgcmp.c.o -c /home/admin1/build/jasper/src/app/imgcmp.c",
+  "file": "/home/admin1/build/jasper/src/app/imgcmp.c",
+  "output": "src/app/CMakeFiles/imgcmp.dir/imgcmp.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/app",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -I/home/admin1/build/jasper/src/app/../libjasper/include -I/home/admin1/build/jasper_build/src/app/../libjasper/include  -pedantic -std=gnu11 -fPIE -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/tmrdemo.dir/tmrdemo.c.o -c /home/admin1/build/jasper/src/app/tmrdemo.c",
+  "file": "/home/admin1/build/jasper/src/app/tmrdemo.c",
+  "output": "src/app/CMakeFiles/tmrdemo.dir/tmrdemo.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/app",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -I/home/admin1/build/jasper/src/app/../libjasper/include -I/home/admin1/build/jasper_build/src/app/../libjasper/include  -pedantic -std=gnu11 -fPIE -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/multithread.dir/multithread.c.o -c /home/admin1/build/jasper/src/app/multithread.c",
+  "file": "/home/admin1/build/jasper/src/app/multithread.c",
+  "output": "src/app/CMakeFiles/multithread.dir/multithread.c.o"
+},
+{
+  "directory": "/home/admin1/build/jasper_build/src/app",
+  "command": "/usr/bin/cc -DJAS_BUILDING_DLL -I/home/admin1/build/jasper/src/app/../libjasper/include -I/home/admin1/build/jasper_build/src/app/../libjasper/include  -pedantic -std=gnu11 -fPIE -fvisibility=hidden -Wall -W -Wno-sign-compare -Wformat -Wmissing-prototypes -Wstrict-prototypes -Wno-type-limits -Wno-tautological-constant-out-of-range-compare -Wno-stringop-truncation -Wno-stringop-overflow -Wmissing-declarations -ffunction-sections -fdata-sections -Wl,--gc-sections -o CMakeFiles/test_1.dir/test_1.c.o -c /home/admin1/build/jasper/src/app/test_1.c",
+  "file": "/home/admin1/build/jasper/src/app/test_1.c",
+  "output": "src/app/CMakeFiles/test_1.dir/test_1.c.o"
+}
+]

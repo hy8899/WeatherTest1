@@ -1,0 +1,1 @@
+/usr/bin/cc  -pedantic CMakeFiles/imgcmp.dir/imgcmp.c.o -o imgcmp  -Wl,-rpath,/home/admin1/build/jasper_build/src/libjasper: ../libjasper/libjasper.so.7.0.0 /usr/lib/x86_64-linux-gnu/libjpeg.so -lm /usr/lib/x86_64-linux-gnu/libpthread.a 

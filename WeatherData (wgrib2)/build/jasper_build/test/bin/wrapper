@@ -1,0 +1,28 @@
+#! /usr/bin/env bash
+
+function eecho()
+{
+	echo "$@" 1>&2
+}
+
+verbose=${JAS_TEST_WRAPPER_VERBOSE:-0}
+
+abs_source_dir="/home/admin1/build/jasper"
+abs_build_dir="/home/admin1/build/jasper_build"
+command="$1"
+shift 1
+
+export JAS_ABS_TOP_BUILDDIR="$abs_build_dir"
+export JAS_TOP_BUILDDIR="$abs_build_dir"
+export JAS_ABS_TOP_SRCDIR="$abs_source_dir"
+export JAS_TOP_SRCDIR="$abs_source_dir"
+
+export JAS_CMAKE_SOURCE_DIR="/home/admin1/build/jasper"
+export JAS_CMAKE_BINARY_DIR="/home/admin1/build/jasper_build"
+export JAS_CMAKE_INSTALL_PREFIX="/home/admin1/local/jasper"
+
+if [ "$verbose" -gt 0 ]; then
+	printenv | fgrep JAS_ 1>&2
+	eecho "Running command $command"
+fi
+"$command" "$@"

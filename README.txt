@@ -1,3 +1,17 @@
+***
+For how to download weather data & interpolate with wgrib2, look at "wgrib2.txt"
+***
+
+==================================================
+REFERENCE DOCS
+==================================================
+https://www.nco.ncep.noaa.gov/pmb/docs/grib2/grib2_doc/
+https://github.com/NOAA-EMC/wgrib2
+
+==================================================
+MAIN FOLDERS
+==================================================
+
 WeatherConversion (xml)
 - Full xml with all parameters
 
@@ -5,6 +19,9 @@ WeatherConversion (txt)
 - Only saves txt files for the following parameters/levels:
 	[Parameters] 	Temperature, WindU, WindV, Height, RH
 	[Levels]	100, 200, 300
+
+Weather Data (wgrib2)
+- compiled wgrib2 that has INTERPOLATES package (for custom interpolate delta values)
 
 ==================================================
 LIBRARIES TO INSTALL
