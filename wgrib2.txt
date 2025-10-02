@@ -43,7 +43,7 @@ INTERPOLATING WEATHER DATA
   -new_grid latlon 91:116:0.125 -11:13:0.125 newsingapore.grib2
 
 (example)
-./wgrib2 gfs.t12z.pgrb2.0p25.f000 \
+./wgrib2 gfs.t12z.pgrb2.0p25.f000.1 \
   -new_grid_winds earth \
   -new_grid_interpolation bilinear \
   -if ":(VGTYP|SOTYP):" \

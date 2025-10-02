@@ -10,6 +10,77 @@
 
 using namespace tinyxml2;
 
+#include <iostream>
+#include <cmath>
+#include <ctime>
+
+bool isComputeSunriseSunset = false;
+
+double singaporeLat = 1.3521;
+double singaporeLon = 103.8198;
+
+int currYear = 2025;
+double timezoneOffset = 8.0;
+
+// Convert degrees <-> radians
+inline double deg2rad(double d) { return d * M_PI / 180.0; }
+inline double rad2deg(double r) { return r * 180.0 / M_PI; }
+
+int dayOfYear(int year, int month, int day) {
+    static const int mdays[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+    int doy = 0;
+    for (int m = 1; m < month; ++m) {
+        doy += mdays[m - 1];
+        if (m == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))) ++doy;
+    }
+    doy += day;
+    return doy;
+}
+
+double equationOfTime(int doy) {
+    double B = 2.0 * M_PI * (doy - 81) / 364.0;
+    return 229.18 * (0.000075 + 0.001868 * cos(B) - 0.032077 * sin(B)
+        - 0.014615 * cos(2 * B) - 0.040849 * sin(2 * B));
+}
+
+double solarDeclination(int doy) {
+    return 0.409 * sin(2.0 * M_PI * (doy - 81) / 364.0);
+}
+
+// Returns sunrise/sunset in LOCAL minutes with decimals
+bool computeSunriseSunsetLocal(
+    int year, int month, int day,
+    double latitude, double longitude,
+    double tzOffsetHours,
+    double& sunriseMin, double& sunsetMin)  // now doubles
+{
+    int n = dayOfYear(year, month, day);
+    double decl = solarDeclination(n);
+    double eqTime = equationOfTime(n);
+
+    double zenith = deg2rad(90.833);
+    double latRad = deg2rad(latitude);
+
+    double cosH = (cos(zenith) - sin(latRad) * sin(decl)) / (cos(latRad) * cos(decl));
+    if (cosH > 1.0 || cosH < -1.0) return false;
+
+    double H = acos(cosH);
+    double deltaMinutes = rad2deg(H) * 4.0;
+
+    double solarNoonUTC = 720 - (4 * longitude) - eqTime;
+    double sunriseUTC = solarNoonUTC - deltaMinutes;
+    double sunsetUTC = solarNoonUTC + deltaMinutes;
+
+    sunriseUTC += tzOffsetHours * 60.0;
+    sunsetUTC += tzOffsetHours * 60.0;
+
+    auto norm = [](double m) { while (m < 0)m += 1440; while (m >= 1440)m -= 1440; return m; };
+    sunriseMin = norm(sunriseUTC);
+    sunsetMin = norm(sunsetUTC);
+
+    return true;
+}
+
 // Helper to convert grib time (yyyymmddhhmm) to ISO8601 string
 std::string timeToISO(int year, int month, int day, int hour, int minute) {
     char buf[32];
@@ -287,17 +358,24 @@ int main() {
 
         //root->InsertEndChild(msgElem);
 
+
+        // =======================================
+        // Create TXT File
+        // =======================================
         std::set<long> validLevels = {100, 200, 300};
         std::set<long> validParamIds = {130, 131, 132, 156, 157, 158, 159, 160};
 
+        // create txt file if parameter ID & altitude is valid
         bool isCreateTxtFile = (validParamIds.count(parameterNumber) > 0) && (validLevels.count(level) > 0);
         if (isCreateTxtFile) {
 
+            // create folder if not created yet
             std::string pName(parameterName);
             if (!std::filesystem::exists(pName)) {
                 std::filesystem::create_directories(pName);
             }
 
+            // set output file name 
             std::string output_file = pName + "/" + 
                 pName + "_" +
                 std::to_string(d) + 
@@ -310,6 +388,7 @@ int main() {
                 std::to_string(di) +
                 ".txt";
 
+            // save txt file data
             XMLError eResult = doc.SaveFile(output_file.c_str());
 
             if (eResult != XML_SUCCESS) {
@@ -317,6 +396,31 @@ int main() {
                 return 1;
             } else {
                 std::cout << std::left << std::setw(25) << pName << std::right << std::setw(5) << level << " ✅\n";
+            }
+
+            // =======================================
+            // Sunset/Sunrise Times
+            // =======================================
+            if (!isComputeSunriseSunset)
+            {
+                double rise, set;
+                if (computeSunriseSunsetLocal(currYear, month, day, singaporeLat, singaporeLon, timezoneOffset, rise, set)) {
+
+                    std::ofstream outFile("sunrise_sunset_times.txt");
+
+                    if (!outFile) {
+                        std::cerr << "Error: Could not open file for writing\n";
+                        return 1;
+                    }
+
+                    outFile << "Sunrise Time: " << rise << " minutes after midnight\n";
+                    outFile << "Sunset Time: " << set << " minutes after midnight\n";
+
+                    outFile.close();
+                    std::cout << "Saved sunrise_sunset_times.txt ✅\n";
+                }
+
+                isComputeSunriseSunset = true;
             }
         }
 
