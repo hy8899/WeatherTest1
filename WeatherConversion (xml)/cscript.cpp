@@ -16,6 +16,22 @@ std::string timeToISO(int year, int month, int day, int hour, int minute) {
     return std::string(buf);
 }
 
+// Helper to convert parameterName to string for Data Array
+std::string getDataArrayName(const std::string& parameterName) {
+    if (parameterName == "Geopotential height")
+        return "Height";
+    else if (parameterName == "Relative humidity")
+        return "RH";
+    else if (parameterName == "Temperature")
+        return "Temperature";
+    else if (parameterName == "U component of wind")
+        return "WindU";
+    else if (parameterName == "V component of wind")
+        return "WindV";
+    else
+        return parameterName; // default: return unchanged
+}
+
 int main() {
 
     // input & output files
@@ -225,10 +241,10 @@ int main() {
         proj->SetAttribute("Ni", std::to_string(Ni).c_str());
         proj->SetAttribute("Nj", std::to_string(Nj).c_str());
 
-        prodDef->SetAttribute("Lat1", 
+        proj->SetAttribute("Lat1",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lat1 * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Lon1",
+        proj->SetAttribute("Lon1",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lon1 * 1000.0)).str().c_str());
 
         //proj->SetAttribute("Lat1", std::to_string(std::trunc(lat1 * 1000.0f)).c_str());
@@ -236,16 +252,16 @@ int main() {
 
         proj->SetAttribute("Flags", "128");
 
-        prodDef->SetAttribute("Lat2",
+        proj->SetAttribute("Lat2",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lat2 * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Lon2",
+        proj->SetAttribute("Lon2",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lon2 * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Di",
+        proj->SetAttribute("Di",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(di * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Dj",
+        proj->SetAttribute("Dj",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(dj * 1000.0)).str().c_str());
 
         //proj->SetAttribute("Lat2", std::to_string(std::trunc(lat2 * 1000.0f)).c_str());
@@ -280,7 +296,10 @@ int main() {
         // =======================================
         // TempDataArray Element
         // =======================================
-        XMLElement* tempArray = doc.NewElement("TempDataArray");
+        std::string dataArrayString = getDataArrayName(parameterName);
+        std::string elementName = dataArrayString + "DataArray";
+        XMLElement* tempArray = doc.NewElement(elementName.c_str());
+
         std::string valStr;
         for (auto v : values) {
             char buf[32];

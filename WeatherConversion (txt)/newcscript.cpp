@@ -89,6 +89,84 @@ std::string timeToISO(int year, int month, int day, int hour, int minute) {
     return std::string(buf);
 }
 
+// Helper to convert parameterName to string for Data Array
+std::string getDataArrayName(const std::string& parameterName) {
+    if (parameterName == "Geopotential height")
+        return "Height";
+    else if (parameterName == "Relative humidity")
+        return "RH";
+    else if (parameterName == "Temperature")
+        return "Temperature";
+    else if (parameterName == "U component of wind")
+        return "WindU";
+    else if (parameterName == "V component of wind")
+        return "WindV";
+    else
+        return parameterName; // default: return unchanged
+}
+
+// save copy of XML for sunrise and sunset specifically
+void saveXMLWithTempValue(XMLDocument& doc, double tempValue, int paramNumber,
+    const std::string& filename,
+    const std::string& paramName,      // "Sunrise Time" or "Sunset Time"
+    const std::string& dataArrayName)  // "SunriseDataArray" or "SunsetDataArray"
+{
+    // Get the root <gribObject>
+    XMLElement* gribObj = doc.RootElement();
+    if (!gribObj || std::string(gribObj->Name()) != "gribObject") {
+        std::cerr << "❌ No <gribObject> element in XML.\n";
+        return;
+    }
+
+    // Update ParameterName attribute
+    gribObj->SetAttribute("ParameterName", paramName.c_str());
+
+    // Find <ProductDefinition> inside <gribObject>
+    XMLElement* productDefinition = gribObj->FirstChildElement("ProductDefinition");
+    if (!productDefinition) {
+        std::cerr << "❌ No <ProductDefinition> element found in <gribObject>.\n";
+        return;
+    }
+
+    // Update ParamAndUnits attribute
+    productDefinition->SetAttribute("ParamAndUnits", paramNumber);
+
+    // Find <BinaryData> inside <gribObject>
+    XMLElement* binaryData = gribObj->FirstChildElement("BinaryData");
+    if (!binaryData) {
+        std::cerr << "❌ No <BinaryData> element found in <gribObject>.\n";
+        return;
+    }
+
+    // Find the <*DataArray> child (the old one, whatever its name)
+    XMLElement* oldDataArray = binaryData->FirstChildElement();
+    if (!oldDataArray) {
+        std::cerr << "❌ No <*DataArray> element found inside <BinaryData>.\n";
+        return;
+    }
+
+    // Create a new DataArray element with the new name
+    XMLElement* newDataArray = doc.NewElement(dataArrayName.c_str());
+
+    // Set the temp value (2 decimal places)
+    std::ostringstream ss;
+    ss << std::fixed << std::setprecision(2) << tempValue;
+    newDataArray->SetText(ss.str().c_str());
+
+    // Remove old DataArray and insert the new one
+    binaryData->DeleteChild(oldDataArray);
+    binaryData->InsertEndChild(newDataArray);
+
+    // Save the modified XML
+    XMLError result = doc.SaveFile(filename.c_str());
+    if (result != XML_SUCCESS) {
+        std::cerr << "❌ Failed to save XML to " << filename << "\n";
+    }
+    else {
+        std::cout << "✅ Saved " << filename << "\n";
+    }
+}
+
 int main() {
 
     const char* input_file = "newsingapore.grib2";
@@ -147,6 +225,7 @@ int main() {
         char parameterName[100];
         size_t nameLen = sizeof(parameterName);
         int err = codes_get_string(h, "name", parameterName, &nameLen);
+        
 
         // ==============================
         // GRIB OBJECT Element
@@ -290,24 +369,24 @@ int main() {
         proj->SetAttribute("Ni", std::to_string(Ni).c_str());
         proj->SetAttribute("Nj", std::to_string(Nj).c_str());
 
-        prodDef->SetAttribute("Lat1",
+        proj->SetAttribute("Lat1",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lat1 * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Lon1",
+        proj->SetAttribute("Lon1",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lon1 * 1000.0)).str().c_str());
 
         proj->SetAttribute("Flags", "128");
 
-        prodDef->SetAttribute("Lat2",
+        proj->SetAttribute("Lat2",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lat2 * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Lon2",
+        proj->SetAttribute("Lon2",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(lon2 * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Di",
+        proj->SetAttribute("Di",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(di * 1000.0)).str().c_str());
 
-        prodDef->SetAttribute("Dj",
+        proj->SetAttribute("Dj",
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(dj * 1000.0)).str().c_str());
 
         proj->SetAttribute("ScanFlags", std::to_string(scanningMode).c_str());
@@ -337,7 +416,10 @@ int main() {
         // =======================================
         // TempDataArray Element
         // =======================================
-        XMLElement* tempArray = doc.NewElement("TempDataArray");
+        std::string dataArrayString = getDataArrayName(parameterName);
+        std::string elementName = dataArrayString + "DataArray";
+        XMLElement* tempArray = doc.NewElement(elementName.c_str());
+
         std::string valStr;
         for (auto v : values) {
             char buf[32];
@@ -358,6 +440,19 @@ int main() {
 
         //root->InsertEndChild(msgElem);
 
+        // =======================================
+        // Sunset/Sunrise Times
+        // =======================================
+        if (!isComputeSunriseSunset)
+        {
+            double rise, set;
+            if (computeSunriseSunsetLocal(currYear, month, day, singaporeLat, singaporeLon, timezoneOffset, rise, set)) {
+                saveXMLWithTempValue(doc, rise, 160, "sunrise.txt", "Sunrise Time", "SunriseDataArray");
+                saveXMLWithTempValue(doc, set, 159, "sunset.txt", "Sunset Time", "SunsetDataArray");
+            }
+
+            isComputeSunriseSunset = true;
+        }
 
         // =======================================
         // Create TXT File
@@ -396,31 +491,6 @@ int main() {
                 return 1;
             } else {
                 std::cout << std::left << std::setw(25) << pName << std::right << std::setw(5) << level << " ✅\n";
-            }
-
-            // =======================================
-            // Sunset/Sunrise Times
-            // =======================================
-            if (!isComputeSunriseSunset)
-            {
-                double rise, set;
-                if (computeSunriseSunsetLocal(currYear, month, day, singaporeLat, singaporeLon, timezoneOffset, rise, set)) {
-
-                    std::ofstream outFile("sunrise_sunset_times.txt");
-
-                    if (!outFile) {
-                        std::cerr << "Error: Could not open file for writing\n";
-                        return 1;
-                    }
-
-                    outFile << "Sunrise Time: " << rise << " minutes after midnight\n";
-                    outFile << "Sunset Time: " << set << " minutes after midnight\n";
-
-                    outFile.close();
-                    std::cout << "Saved sunrise_sunset_times.txt ✅\n";
-                }
-
-                isComputeSunriseSunset = true;
             }
         }
 

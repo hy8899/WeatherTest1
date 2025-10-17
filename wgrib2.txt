@@ -40,7 +40,7 @@ INTERPOLATING WEATHER DATA
   -if ":(VGTYP|SOTYP):" \
      -new_grid_interpolation neighbor \
   -fi \
-  -new_grid latlon 91:116:0.125 -11:13:0.125 newsingapore.grib2
+  -new_grid latlon 91.3198:201:0.125 -11.1479:201:0.125 newsingapore.grib2
 
 (example)
 ./wgrib2 gfs.t12z.pgrb2.0p25.f000.1 \
@@ -49,8 +49,7 @@ INTERPOLATING WEATHER DATA
   -if ":(VGTYP|SOTYP):" \
      -new_grid_interpolation neighbor \
   -fi \
-  -new_grid latlon 91:116:0.125 -11:13:0.125 newsingapore.grib2
-
+  -new_grid latlon 91.3198:201:0.125 -11.1479:201:0.125 newsingapore.grib2
 
 ***
 NOTE: If you see this error after running the wgrib command:
