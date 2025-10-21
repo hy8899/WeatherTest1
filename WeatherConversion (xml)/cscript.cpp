@@ -19,11 +19,11 @@ std::string timeToISO(int year, int month, int day, int hour, int minute) {
 // Helper to convert parameterName to string for Data Array
 std::string getDataArrayName(const std::string& parameterName) {
     if (parameterName == "Geopotential height")
-        return "Height";
+        return "GPH";
     else if (parameterName == "Relative humidity")
         return "RH";
     else if (parameterName == "Temperature")
-        return "Temperature";
+        return "Temp";
     else if (parameterName == "U component of wind")
         return "WindU";
     else if (parameterName == "V component of wind")
@@ -124,7 +124,7 @@ int main() {
         indicator->SetAttribute("xmlns", "");
         indicator->SetAttribute("GribHeader", "GRIB");
         indicator->SetAttribute("NumOfOctets", std::to_string(section1Length).c_str());
-        indicator->SetAttribute("GribType", std::to_string(edition).c_str());
+        indicator->SetAttribute("GribType", "1");
         msgElem->InsertEndChild(indicator);
 
         long tablesVersion, centre, genProcID, gridTypeCode;
@@ -136,8 +136,8 @@ int main() {
         codes_get_long(h, "generatingProcessIdentifier", &genProcID);
         codes_get_long(h, "gridTypeCode", &gridTypeCode);
         codes_get_long(h, "paramId", &parameterNumber);
-        codes_get_long(h, "typeOfLevel", &typeOfLevel);
-        codes_get_long(h, "level", &level);
+        codes_get_long(h, "typeOfFirstFixedSurface", &typeOfLevel);
+        codes_get_long(h, "scaledValueOfFirstFixedSurface", &level);
         codes_get_long(h, "indicatorOfUnitOfTimeRange", &timeRangeIndicator);
         codes_get_long(h, "subCentre", &subcenterID);
         codes_get_long(h, "decimalScaleFactor", &decimalScaleFactor);
@@ -172,6 +172,7 @@ int main() {
         //prodDef->SetAttribute("ParamAndUnits", std::to_string(parameterNumber).c_str());
 
         prodDef->SetAttribute("LevelType", std::to_string(typeOfLevel).c_str());
+        level /= 100;
         prodDef->SetAttribute("Level", std::to_string(level).c_str());
         prodDef->SetAttribute("ReferenceTime", std::to_string(d).c_str());
         prodDef->SetAttribute("Month", std::to_string(month).c_str());
