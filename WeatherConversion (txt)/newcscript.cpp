@@ -130,6 +130,7 @@ void saveXMLWithTempValue(XMLDocument& doc, double tempValue, int paramNumber,
 
     // Update ParamAndUnits attribute
     productDefinition->SetAttribute("ParamAndUnits", paramNumber);
+    productDefinition->SetAttribute("Level", 0);
 
     // Find <BinaryData> inside <gribObject>
     XMLElement* binaryData = gribObj->FirstChildElement("BinaryData");
@@ -212,10 +213,31 @@ int main() {
         codes_get_string(h, "units", units, &units_len);
         std::string parameter_name = std::string(name) + "[" + std::string(units) + "]";
 
-        std::string filename = input_file;
+        /*std::string filename = input_file;
         size_t pos = filename.find(".grib2");
         if (pos != std::string::npos)
-            filename = filename.substr(0, pos);
+            filename = filename.substr(0, pos);*/
+
+        long parameterNumber;
+        codes_get_long(h, "paramId", &parameterNumber);
+
+        std::ostringstream monthOss;
+        monthOss << std::setw(2) << std::setfill('0') << m;
+        std::string monthResult = monthOss.str();
+
+        std::ostringstream dayOss;
+        dayOss << std::setw(2) << std::setfill('0') << d;
+        std::string dayResult = dayOss.str();
+
+        std::ostringstream hourOss;
+        hourOss << std::setw(2) << std::setfill('0') << hh;
+        std::string hourResult = hourOss.str();
+
+        std::string filename = "model-ecmwf-0" +
+            hourResult + "-" +
+            std::to_string(y) + monthResult + dayResult +
+            "_000000_" + hourResult + "_" +
+            std::to_string(parameterNumber) + "_" + "400xgb";
 
         size_t values_len = 0;
         codes_get_size(h, "values", &values_len);
@@ -257,14 +279,15 @@ int main() {
         msgElem->InsertEndChild(indicator);
 
         long tablesVersion, centre, genProcID, gridTypeCode;
-        long parameterNumber, typeOfLevel, level, timeRangeIndicator, subcenterID;
+        //long parameterNumber, typeOfLevel, level, timeRangeIndicator, subcenterID;
+        long typeOfLevel, level, timeRangeIndicator, subcenterID;
         long decimalScaleFactor;
 
         codes_get_long(h, "tablesVersion", &tablesVersion);
         codes_get_long(h, "centre", &centre);
         codes_get_long(h, "generatingProcessIdentifier", &genProcID);
         codes_get_long(h, "gridTypeCode", &gridTypeCode);
-        codes_get_long(h, "paramId", &parameterNumber);
+        //codes_get_long(h, "paramId", &parameterNumber);
         codes_get_long(h, "typeOfFirstFixedSurface", &typeOfLevel);
         codes_get_long(h, "scaledValueOfFirstFixedSurface", &level);
         codes_get_long(h, "indicatorOfUnitOfTimeRange", &timeRangeIndicator);
@@ -404,13 +427,15 @@ int main() {
 
         // =======================================
         // BINARY DATA element
-        // =======================================
+        // =======================================            
         XMLElement* binaryData = doc.NewElement("BinaryData");
         binaryData->SetAttribute("xmlns", "");
         binaryData->SetAttribute("NumOfOctets", std::to_string(values_len * 4).c_str());
         binaryData->SetAttribute("FlagsAndUnused", "12");
         binaryData->SetAttribute("BinaryScaleFactor", std::to_string(binaryScaleFactor).c_str());
-        binaryData->SetAttribute("ReferenceValue", std::to_string(referenceValue).c_str());
+        auto refValue = referenceValue * std::pow(10, -decimalScaleFactor);
+        binaryData->SetAttribute("ReferenceValue", std::to_string(refValue).c_str());
+        //binaryData->SetAttribute("ReferenceValue", std::to_string(referenceValue).c_str());
         binaryData->SetAttribute("DatumPacked", std::to_string(numberOfValues).c_str());
         binaryData->SetAttribute("OptionalFlags", "0");
 
@@ -471,8 +496,24 @@ int main() {
                 std::filesystem::create_directories(pName);
             }
 
+            // format month & day string
+            std::ostringstream oss;
+            oss << std::setw(2) << std::setfill('0') << month
+                << std::setw(2) << std::setfill('0') << day;
+            std::string result = oss.str();
+
             // set output file name 
-            std::string output_file = pName + "/" + 
+            std::string output_file = pName + "/" +
+                "ecmwf" + "_" +
+                "25" + 
+                result +
+                std::to_string(hour) + "_" +
+                std::to_string(level) + "_" +
+                std::to_string(hh) + "_" +
+                std::to_string(parameterNumber) + "_" +
+                "125" +
+                ".txt";
+            /*std::string output_file = pName + "/" + 
                 pName + "_" +
                 std::to_string(d) + 
                 std::to_string(month) + 
@@ -482,7 +523,7 @@ int main() {
                 std::to_string(hh) + "_" + 
                 std::to_string(parameterNumber) + "_" + 
                 std::to_string(di) +
-                ".txt";
+                ".txt";*/
 
             // save txt file data
             XMLError eResult = doc.SaveFile(output_file.c_str());

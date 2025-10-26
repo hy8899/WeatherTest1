@@ -278,8 +278,8 @@ int main() {
 
         long binaryScaleFactor, numberOfValues;
         double referenceValue;
-        codes_get_long(h, "binaryScaleFactor", &binaryScaleFactor);
-        codes_get_double(h, "referenceValue", &referenceValue);
+        codes_get_long(h, "BinaryScaleFactor", &binaryScaleFactor);
+        codes_get_double(h, "ReferenceValue", &referenceValue);
         codes_get_long(h, "numberOfValues", &numberOfValues);
 
         // =======================================
