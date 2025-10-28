@@ -50,33 +50,45 @@ double solarDeclination(int doy) {
 // Returns sunrise/sunset in LOCAL minutes with decimals
 bool computeSunriseSunsetLocal(
     int year, int month, int day,
-    double latitude, double longitude,
+    double latitude, double longitude, double delta, int pointsNum,
     double tzOffsetHours,
-    double& sunriseMin, double& sunsetMin)  // now doubles
+    std::vector<double>& sunriseMin, std::vector<double>& sunsetMin)  // now doubles
 {
-    int n = dayOfYear(year, month, day);
-    double decl = solarDeclination(n);
-    double eqTime = equationOfTime(n);
+    for (int i = 0; i < pointsNum; ++i) {
+        for (int j = 0; j < pointsNum; ++j) {
 
-    double zenith = deg2rad(90.833);
-    double latRad = deg2rad(latitude);
+            double currSunriseMin, currSunsetMin;
+            double currLatitude = latitude + (delta * i);
+            double currLongitude = longitude + (delta * j);
 
-    double cosH = (cos(zenith) - sin(latRad) * sin(decl)) / (cos(latRad) * cos(decl));
-    if (cosH > 1.0 || cosH < -1.0) return false;
+            int n = dayOfYear(year, month, day);
+            double decl = solarDeclination(n);
+            double eqTime = equationOfTime(n);
 
-    double H = acos(cosH);
-    double deltaMinutes = rad2deg(H) * 4.0;
+            double zenith = deg2rad(90.833);
+            double latRad = deg2rad(currLatitude);
 
-    double solarNoonUTC = 720 - (4 * longitude) - eqTime;
-    double sunriseUTC = solarNoonUTC - deltaMinutes;
-    double sunsetUTC = solarNoonUTC + deltaMinutes;
+            double cosH = (cos(zenith) - sin(latRad) * sin(decl)) / (cos(latRad) * cos(decl));
+            if (cosH > 1.0 || cosH < -1.0) return false;
 
-    sunriseUTC += tzOffsetHours * 60.0;
-    sunsetUTC += tzOffsetHours * 60.0;
+            double H = acos(cosH);
+            double deltaMinutes = rad2deg(H) * 4.0;
 
-    auto norm = [](double m) { while (m < 0)m += 1440; while (m >= 1440)m -= 1440; return m; };
-    sunriseMin = norm(sunriseUTC);
-    sunsetMin = norm(sunsetUTC);
+            double solarNoonUTC = 720 - (4 * currLongitude) - eqTime;
+            double sunriseUTC = solarNoonUTC - deltaMinutes;
+            double sunsetUTC = solarNoonUTC + deltaMinutes;
+
+            sunriseUTC += tzOffsetHours * 60.0;
+            sunsetUTC += tzOffsetHours * 60.0;
+
+            auto norm = [](double m) { while (m < 0)m += 1440; while (m >= 1440)m -= 1440; return m; };
+            currSunriseMin = norm(sunriseUTC);
+            currSunsetMin = norm(sunsetUTC);
+
+            sunriseMin.push_back(currSunriseMin);
+            sunsetMin.push_back(currSunsetMin);
+        }
+    }
 
     return true;
 }
@@ -106,7 +118,7 @@ std::string getDataArrayName(const std::string& parameterName) {
 }
 
 // save copy of XML for sunrise and sunset specifically
-void saveXMLWithTempValue(XMLDocument& doc, double tempValue, int paramNumber,
+void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int paramNumber,
     const std::string& filename,
     const std::string& paramName,      // "Sunrise Time" or "Sunset Time"
     const std::string& dataArrayName)  // "SunriseDataArray" or "SunsetDataArray"
@@ -139,7 +151,7 @@ void saveXMLWithTempValue(XMLDocument& doc, double tempValue, int paramNumber,
         return;
     }
 
-    // Find the <*DataArray> child (the old one, whatever its name)
+    // Find the <*DataArray> child (the old one)
     XMLElement* oldDataArray = binaryData->FirstChildElement();
     if (!oldDataArray) {
         std::cerr << "❌ No <*DataArray> element found inside <BinaryData>.\n";
@@ -151,8 +163,16 @@ void saveXMLWithTempValue(XMLDocument& doc, double tempValue, int paramNumber,
 
     // Set the temp value (2 decimal places)
     std::ostringstream ss;
-    ss << std::fixed << std::setprecision(2) << tempValue;
+    ss << std::fixed << std::setprecision(2);
+    for (size_t i = 0; i < tempValue.size(); ++i) {
+        ss << tempValue[i];
+        if (i != tempValue.size() - 1) ss << " ";
+    }
     newDataArray->SetText(ss.str().c_str());
+
+    //std::ostringstream ss;
+    //ss << std::fixed << std::setprecision(2) << tempValue;
+    //newDataArray->SetText(ss.str().c_str());
 
     // Remove old DataArray and insert the new one
     binaryData->DeleteChild(oldDataArray);
@@ -471,10 +491,25 @@ int main() {
         // =======================================
         if (!isComputeSunriseSunset)
         {
-            double rise, set;
-            if (computeSunriseSunsetLocal(currYear, month, day, singaporeLat, singaporeLon, timezoneOffset, rise, set)) {
-                saveXMLWithTempValue(doc, rise, 160, "sunrise.txt", "Sunrise Time", "SunSetTimeDataArray");
-                saveXMLWithTempValue(doc, set, 159, "sunset.txt", "Sunset Time", "SunRiseTimeDataArray");
+            std::vector<double> rise, set;
+            if (computeSunriseSunsetLocal(currYear, month, day, singaporeLat, singaporeLon, 0.125, 201, timezoneOffset, rise, set)) {
+
+                // format month & day string
+                std::ostringstream oss;
+                oss << std::setw(2) << std::setfill('0') << month
+                    << std::setw(2) << std::setfill('0') << day;
+                std::string result = oss.str();
+
+                std::string base_filename = std::string("ecmwf_25") + result +
+                    std::to_string(hour) + "_" +
+                    std::to_string(level) + "_" +
+                    std::to_string(hh) + "_";
+
+                std::string sunrise_filename = base_filename + std::to_string(160) + "_" + "125" + ".xml";
+                std::string sunset_filename = base_filename + std::to_string(159) + "_" + "125" + ".xml";
+
+                saveXMLWithTempValue(doc, rise, 160, sunrise_filename, "Sunrise Time", "SunSetTimeDataArray");
+                saveXMLWithTempValue(doc, set, 159, sunset_filename, "Sunset Time", "SunRiseTimeDataArray");
             }
 
             isComputeSunriseSunset = true;
@@ -512,7 +547,8 @@ int main() {
                 std::to_string(hh) + "_" +
                 std::to_string(parameterNumber) + "_" +
                 "125" +
-                ".txt";
+                ".xml";
+
             /*std::string output_file = pName + "/" + 
                 pName + "_" +
                 std::to_string(d) + 
@@ -523,7 +559,7 @@ int main() {
                 std::to_string(hh) + "_" + 
                 std::to_string(parameterNumber) + "_" + 
                 std::to_string(di) +
-                ".txt";*/
+                ".xml";*/
 
             // save txt file data
             XMLError eResult = doc.SaveFile(output_file.c_str());
