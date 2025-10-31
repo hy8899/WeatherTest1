@@ -35,8 +35,8 @@ std::string getDataArrayName(const std::string& parameterName) {
 int main() {
 
     // input & output files
-    const char* input_file = "newsingapore.grib2";
-    const char* output_file = "newoutput.xml";
+    const char* input_file = "gfs.t12z.pgrb2.0p25.grib2";
+    const char* output_file = "gfs.t12z.pgrb2.0p25.xml";
 
     // open input file
     FILE* f = fopen(input_file, "rb");

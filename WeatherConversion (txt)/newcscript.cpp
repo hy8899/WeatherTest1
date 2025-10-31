@@ -218,7 +218,7 @@ void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int p
 
 int main() {
 
-    const char* input_file = "newsingapore.grib2";
+    const char* input_file = "gfs.t12z.pgrb2.0p25.grib2";
     //const char* output_file = "newoutput.xml";
 
     FILE* f = fopen(input_file, "rb");
