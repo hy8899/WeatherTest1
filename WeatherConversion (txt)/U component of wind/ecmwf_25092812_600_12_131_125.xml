@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gribObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://c4i.mlt/ICDU/schema" ForecastTime="2025-09-28T12:00:00.000Z" RunTime="2025-09-28T12:00:00.000Z" ParameterName="U component of wind" FileName="model-ecmwf-012-20250928_000000_12_131_400xgb">
+<gribObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://c4i.mlt/ICDU/schema" ForecastTime="2025-09-28T12:00:00.000Z" RunTime="2025-09-28T12:00:00.000Z" ParameterName="U component of wind" FileName="model-ecmwf-012-20250928_000000_12_131_600xgb">
     <Indicator xmlns="" GribHeader="GRIB" NumOfOctets="21" GribType="1"/>
-    <ProductDefinition xmlns="" NumOfOctets="4" ParamTableVersion="2" OrigCenter="7" ProcessID="81" GridID="4" GDS_BDS_Flag="128" ParamAndUnits="131" LevelType="100" Level="600" ReferenceTime="28" Month="9" Day="28" Hour="12" Minute="0" ForecastTimeUnits="1" PeriodOfTime1="12" PeriodOfTime2="0" TimeRangeIndicator="1" NumInAverage="1" NumMissingAverage="0" CenturyOfReference="21" SubcenterID="0" DecimalScaleFactor="1" Reserved1="0"/>
+    <ProductDefinition xmlns="" NumOfOctets="4" ParamTableVersion="2" OrigCenter="7" ProcessID="81" GridID="32" GDS_BDS_Flag="128" ParamAndUnits="131" LevelType="100" Level="600" ReferenceTime="28" Month="9" Day="28" Hour="12" Minute="0" ForecastTimeUnits="1" PeriodOfTime1="12" PeriodOfTime2="0" TimeRangeIndicator="1" NumInAverage="1" NumMissingAverage="0" CenturyOfReference="21" SubcenterID="0" DecimalScaleFactor="1" Reserved1="0"/>
     <GridDescription xmlns="" NumOfOctets="72" NV="0" PV="255" DataRepresentationType="0">
         <LatLonProjection Ni="201" Nj="201" Lat1="-11147" Lon1="91319" Flags="128" Lat2="13852" Lon2="116319" Di="125" Dj="125" ScanFlags="64" Reserved="0"/>
     </GridDescription>

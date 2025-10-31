@@ -121,7 +121,7 @@ std::string getDataArrayName(const std::string& parameterName) {
 void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int paramNumber,
     const std::string& filename,
     const std::string& paramName,      // "Sunrise Time" or "Sunset Time"
-    const std::string& dataArrayName)  // "SunriseDataArray" or "SunsetDataArray"
+    const std::string& dataArrayName)   // "SunriseDataArray" or "SunsetDataArray"
 {
     // Get the root <gribObject>
     XMLElement* gribObj = doc.RootElement();
@@ -133,6 +133,25 @@ void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int p
     // Update ParameterName attribute
     gribObj->SetAttribute("ParameterName", paramName.c_str());
 
+
+    // *** Update Filename attribute ***
+
+    // Find last underscore
+    size_t lastUnderscore = filename.rfind('_');
+    if (lastUnderscore == std::string::npos) return;
+
+    // Find second-to-last underscore
+    size_t secondLastUnderscore = filename.rfind('_', lastUnderscore - 1);
+    if (secondLastUnderscore == std::string::npos) return;
+
+    // Get prefix & rebuild string
+    std::string prefix = filename.substr(0, secondLastUnderscore + 1);
+    std::string newFilename = prefix + std::to_string(paramNumber) + "_0xgb";
+
+    gribObj->SetAttribute("FileName", newFilename.c_str());
+
+    // *** End ***
+
     // Find <ProductDefinition> inside <gribObject>
     XMLElement* productDefinition = gribObj->FirstChildElement("ProductDefinition");
     if (!productDefinition) {
@@ -140,7 +159,7 @@ void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int p
         return;
     }
 
-    // Update ParamAndUnits attribute
+    // Update ParamAndUnits & level attribute
     productDefinition->SetAttribute("ParamAndUnits", paramNumber);
     productDefinition->SetAttribute("Level", 0);
 
@@ -162,9 +181,13 @@ void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int p
     XMLElement* newDataArray = doc.NewElement(dataArrayName.c_str());
 
     // Set the temp value (2 decimal places)
+    double refMin = 9999;
     std::ostringstream ss;
     ss << std::fixed << std::setprecision(2);
     for (size_t i = 0; i < tempValue.size(); ++i) {
+        if (tempValue[i] < refMin) {
+            refMin = tempValue[i];
+        }
         ss << tempValue[i];
         if (i != tempValue.size() - 1) ss << " ";
     }
@@ -173,6 +196,11 @@ void saveXMLWithTempValue(XMLDocument& doc, std::vector<double> tempValue, int p
     //std::ostringstream ss;
     //ss << std::fixed << std::setprecision(2) << tempValue;
     //newDataArray->SetText(ss.str().c_str());
+
+    // set new reference value 
+    std::ostringstream refOss;
+    refOss << std::fixed << std::setprecision(2) << refMin;
+    binaryData->SetAttribute("ReferenceValue", refOss.str().c_str());
 
     // Remove old DataArray and insert the new one
     binaryData->DeleteChild(oldDataArray);
@@ -241,6 +269,10 @@ int main() {
         long parameterNumber;
         codes_get_long(h, "paramId", &parameterNumber);
 
+        long level;
+        codes_get_long(h, "scaledValueOfFirstFixedSurface", &level);
+        level /= 100;
+
         std::ostringstream monthOss;
         monthOss << std::setw(2) << std::setfill('0') << m;
         std::string monthResult = monthOss.str();
@@ -257,7 +289,7 @@ int main() {
             hourResult + "-" +
             std::to_string(y) + monthResult + dayResult +
             "_000000_" + hourResult + "_" +
-            std::to_string(parameterNumber) + "_" + "400xgb";
+            std::to_string(parameterNumber) + "_" + std::to_string(level) + "xgb";
 
         size_t values_len = 0;
         codes_get_size(h, "values", &values_len);
@@ -300,7 +332,7 @@ int main() {
 
         long tablesVersion, centre, genProcID, gridTypeCode;
         //long parameterNumber, typeOfLevel, level, timeRangeIndicator, subcenterID;
-        long typeOfLevel, level, timeRangeIndicator, subcenterID;
+        long typeOfLevel, timeRangeIndicator, subcenterID;
         long decimalScaleFactor;
 
         codes_get_long(h, "tablesVersion", &tablesVersion);
@@ -309,7 +341,7 @@ int main() {
         codes_get_long(h, "gridTypeCode", &gridTypeCode);
         //codes_get_long(h, "paramId", &parameterNumber);
         codes_get_long(h, "typeOfFirstFixedSurface", &typeOfLevel);
-        codes_get_long(h, "scaledValueOfFirstFixedSurface", &level);
+        //codes_get_long(h, "scaledValueOfFirstFixedSurface", &level);
         codes_get_long(h, "indicatorOfUnitOfTimeRange", &timeRangeIndicator);
         codes_get_long(h, "subCentre", &subcenterID);
         codes_get_long(h, "decimalScaleFactor", &decimalScaleFactor);
@@ -344,7 +376,7 @@ int main() {
         //prodDef->SetAttribute("ParamAndUnits", std::to_string(parameterNumber).c_str());
         
         prodDef->SetAttribute("LevelType", std::to_string(typeOfLevel).c_str());
-        level /= 100;
+        //level /= 100;
         prodDef->SetAttribute("Level", std::to_string(level).c_str());
         prodDef->SetAttribute("ReferenceTime", std::to_string(d).c_str());
         prodDef->SetAttribute("Month", std::to_string(month).c_str());
@@ -453,9 +485,11 @@ int main() {
         binaryData->SetAttribute("NumOfOctets", std::to_string(values_len * 4).c_str());
         binaryData->SetAttribute("FlagsAndUnused", "12");
         binaryData->SetAttribute("BinaryScaleFactor", std::to_string(binaryScaleFactor).c_str());
+
         auto refValue = referenceValue * std::pow(10, -decimalScaleFactor);
         binaryData->SetAttribute("ReferenceValue", std::to_string(refValue).c_str());
         //binaryData->SetAttribute("ReferenceValue", std::to_string(referenceValue).c_str());
+
         binaryData->SetAttribute("DatumPacked", std::to_string(numberOfValues).c_str());
         binaryData->SetAttribute("OptionalFlags", "0");
 
@@ -508,8 +542,8 @@ int main() {
                 std::string sunrise_filename = base_filename + std::to_string(160) + "_" + "125" + ".xml";
                 std::string sunset_filename = base_filename + std::to_string(159) + "_" + "125" + ".xml";
 
-                saveXMLWithTempValue(doc, rise, 160, sunrise_filename, "Sunrise Time", "SunSetTimeDataArray");
-                saveXMLWithTempValue(doc, set, 159, sunset_filename, "Sunset Time", "SunRiseTimeDataArray");
+                saveXMLWithTempValue(doc, rise, 160, sunrise_filename, "Sunrise Time", "SunRiseTimeDataArray");
+                saveXMLWithTempValue(doc, set, 159, sunset_filename, "Sunset Time", "SunSetTimeDataArray");
             }
 
             isComputeSunriseSunset = true;
