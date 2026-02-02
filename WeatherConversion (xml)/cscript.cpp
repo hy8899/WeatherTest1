@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 #include <eccodes.h>
 #include "tinyxml2.h"
 
@@ -24,6 +25,22 @@ std::string getDataArrayName(const std::string& parameterName) {
         return "RH";
     else if (parameterName == "Temperature")
         return "Temp";
+    else if (parameterName == "U component of wind")
+        return "WindU";
+    else if (parameterName == "V component of wind")
+        return "WindV";
+    else
+        return parameterName; // default: return unchanged
+}
+
+// Helper to convert parameterName to string for Folder Name
+std::string getParameterName(const std::string& parameterName) {
+    if (parameterName == "Geopotential height")
+        return "Height";
+    else if (parameterName == "Relative humidity")
+        return "RH";
+    else if (parameterName == "Temperature")
+        return "Temperature";
     else if (parameterName == "U component of wind")
         return "WindU";
     else if (parameterName == "V component of wind")
@@ -111,7 +128,11 @@ int main() {
 
         msgElem->SetAttribute("ForecastTime", run_time.c_str());
         msgElem->SetAttribute("RunTime", run_time.c_str());
+
+        // update parameter name
+        std::string newParameterName = getParameterName(std::string(parameterName));
         msgElem->SetAttribute("ParameterName", parameterName);
+
         msgElem->SetAttribute("FileName", filename.c_str());
 
         long section1Length = 0;
@@ -187,6 +208,7 @@ int main() {
 
         double numInAvg = 0;
         codes_get_double(h, "average", &numInAvg);
+        if (numInAvg <= 0) { numInAvg = 0; }        // value cannot go below 0 (or be -0)
         prodDef->SetAttribute("NumInAverage", 
             (std::ostringstream() << std::fixed << std::setprecision(0) << std::trunc(numInAvg)).str().c_str());
 
@@ -230,7 +252,11 @@ int main() {
         // =======================================
         XMLElement* gridDesc = doc.NewElement("GridDescription");
         gridDesc->SetAttribute("xmlns", "");
+
+        // limit # of octets to between 0-50
+        section3Length = std::clamp(section3Length, 0L, 50L);
         gridDesc->SetAttribute("NumOfOctets", section3Length);
+
         gridDesc->SetAttribute("NV", NV);
         gridDesc->SetAttribute("PV", "255");
         gridDesc->SetAttribute("DataRepresentationType", dataRepType);
@@ -291,7 +317,11 @@ int main() {
         binaryData->SetAttribute("FlagsAndUnused", "12");
         binaryData->SetAttribute("BinaryScaleFactor", std::to_string(binaryScaleFactor).c_str());
         binaryData->SetAttribute("ReferenceValue", std::to_string(referenceValue).c_str());
+
+        // limit value to between 0-16
+        numberOfValues = std::clamp(numberOfValues, 0L, 16L);
         binaryData->SetAttribute("DatumPacked", std::to_string(numberOfValues).c_str());
+
         binaryData->SetAttribute("OptionalFlags", "0");
 
         // =======================================
